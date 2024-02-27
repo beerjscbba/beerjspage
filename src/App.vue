@@ -1,40 +1,98 @@
 <script setup>
-import HelloWorld from "./components/HelloWorld.vue";
+import { ref ,  onMounted, onUnmounted } from "vue";
 import Header from "./components/Header.vue";
+
+import hljs from "highlight.js";
+import javascript from "highlight.js/lib/languages/javascript";
+
+// Then register the languages you need
+hljs.registerLanguage("javascript", javascript);
+
+const code = `function enfriar (cerveza, amigos, cb) {
+  if (amigos) {
+    cerveza.fria = true
+    cb(false, cerveza)
+  } else {
+    cb(true, cerveza)
+  }
+}
+function meet ({ cerveza, amigos }) {
+  return meet = new Promise((resolve, reject) => {
+    enfriar(cerveza, amigos, function(err, cerveza){
+      if (!err) {
+        resolve({cerveza, amigos})
+      } else {
+        reject({cerveza, amigos})
+      }
+    })
+  })
+}
+const requisitos = {
+  amigos: true,
+  cerveza: {
+    fria: false
+  }
+}
+meet(requisitos)
+  .then(({ cerveza, amigos }) => {
+    console.log('cerveza fria:', cerveza.fria)
+    console.log('amigos:', amigos)
+    console.log('la cerveza esta fria, los amigos la consiguieron fria y estan listos para disfrutarla')
+  })
+  .catch(({ cerveza, amigos }) => {
+    console.log('cerveza fria:', cerveza.fria)
+    console.log('amigos:', amigos)
+    console.log('los amigos son necesarios para conseguir unas buenas cervezas frias')
+  })`;
+
+const isSticky = ref(false);
+
+onMounted(() => {
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 150) {
+      isSticky.value = true;
+    } else {
+      isSticky.value = false;
+    }
+  });
+});
+
 </script>
 
 <template>
   <div id="app">
-    <Header id="header" class="absolut z-10" />
+      <Header id="header"  class="z-20 top-0" :class="{sticky:isSticky, 'bg-black': isSticky, absolute: !isSticky, 'bg-transparent': !isSticky}" />
     <div
       id="hero"
-      class="bg-cover bg-center h-550 md:h-800 relative before:block before:h-550 md:before:h-800 before:bg-gradient-to-t from-black before:opacity-50"
-      style="background-image: url(/src/assets/beer-photo-02.jpg)"
+      class="bg-cover bg-center h-550 md:h-800 relative before:block before:h-550 md:before:h-800 before:bg-gradient-to-t from-black before:opacity-100"
+      style="
+        background-image: url(/src/assets/pexels-pavel-danilyuk-5858069.jpg);
+      "
     >
-      <div class="absolute bottom-44 right-0 left-0">
+      <div class="absolute bottom-10 right-0 left-0">
         <div class="flex justify-center gap-6 pb-4">
           <font-awesome-icon
-            class="text-7xl text-yellow-400 shadow-lg"
+            class="text-5xl md:text-7xl text-yellow-400 shadow-lg"
             icon="fa-brands fa-js"
           />
 
           <font-awesome-icon
-            class="text-7xl text-white shadow-lg"
+            class="text-5xl md:text-7xl text-white shadow-lg"
             icon="fa-brands fa-angular"
           />
 
           <font-awesome-icon
-            class="text-7xl text-white shadow-lg"
+            class="text-5xl md:text-7xl text-white shadow-lg"
             icon="fa-brands fa-react"
           />
 
           <font-awesome-icon
-            class="text-7xl text-white shadow-lg"
+            class="text-5xl md:text-7xl text-white shadow-lg"
             icon="fa-brands fa-vuejs"
           />
         </div>
         <p
-          class="text-white text-xl font-bold tracking-widest text-center border-t border-yellow-300 w-96 md:w-450 mx-auto pt-3"
+          class="text-white text-xl font-bold tracking-widest text-center border-t border-yellow-300 w-80 md:w-450 mx-auto pt-3"
         >
           ENCUENTRO DE CERVEZA Y CODIGO
         </p>
@@ -139,59 +197,21 @@ import Header from "./components/Header.vue";
             BEER <span class="text-yellow-500">JS</span>
           </span>
         </div>
-        <div class="flex md:gap-8 gap-3 md:justify-center flex-col md:flex-row pt-5">
+        <div
+          class="flex md:gap-8 gap-3 md:justify-center flex-col md:flex-row pt-5"
+        >
           <a href="mailto:beerjscbba@gmail.com">
             <font-awesome-icon icon="fa-solid fa-envelope" />
             beerjscbba@gmail.com
           </a>
-          <a href="https://es.confcodeofconduct.com/"><font-awesome-icon icon="fa-solid fa-beer-mug-empty" /> Código de conducta</a>
+          <a href="https://es.confcodeofconduct.com/"
+            ><font-awesome-icon icon="fa-solid fa-beer-mug-empty" /> Código de
+            conducta</a
+          >
+
+          <a href="https://t.me/+9ejBXZQ2PQg4YzYx"><font-awesome-icon icon="fa-brands fa-telegram" /> Únete en telegram </a>
         </div>
       </div>
     </footer>
   </div>
 </template>
-
-<script>
-import hljs from "highlight.js";
-import javascript from "highlight.js/lib/languages/javascript";
-
-// Then register the languages you need
-hljs.registerLanguage("javascript", javascript);
-
-const code = `function enfriar (cerveza, amigos, cb) {
-  if (amigos) {
-    cerveza.fria = true
-    cb(false, cerveza)
-  } else {
-    cb(true, cerveza)
-  }
-}
-function meet ({ cerveza, amigos }) {
-  return meet = new Promise((resolve, reject) => {
-    enfriar(cerveza, amigos, function(err, cerveza){
-      if (!err) {
-        resolve({cerveza, amigos})
-      } else {
-        reject({cerveza, amigos})
-      }
-    })
-  })
-}
-const requisitos = {
-  amigos: true,
-  cerveza: {
-    fria: false
-  }
-}
-meet(requisitos)
-  .then(({ cerveza, amigos }) => {
-    console.log('cerveza fria:', cerveza.fria)
-    console.log('amigos:', amigos)
-    console.log('la cerveza esta fria, los amigos la consiguieron fria y estan listos para disfrutarla')
-  })
-  .catch(({ cerveza, amigos }) => {
-    console.log('cerveza fria:', cerveza.fria)
-    console.log('amigos:', amigos)
-    console.log('los amigos son necesarios para conseguir unas buenas cervezas frias')
-  })`;
-</script>
