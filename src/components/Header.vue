@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-black py-3 w-full">
+  <header class= "py-3 w-full">
     <div
       class="mx-auto max-mx-auto max-w-container px-4 sm:px-6 lg:px-8-container flex justify-between items-center"
     >
@@ -28,6 +28,12 @@
         <a target="blank" href="https://www.youtube.com/@beerjscocha7865">
           <font-awesome-icon
             icon="fa-brands fa-youtube"
+            class="text-white text-2xl md:text-3xl"
+          />
+        </a>
+        <a href="https://github.com/beerjscbba">
+          <font-awesome-icon
+            icon="fa-brands fa-github-alt"
             class="text-white text-2xl md:text-3xl"
           />
         </a>
