@@ -3,11 +3,10 @@
     <div
       class="mx-auto max-mx-auto max-w-container px-4 sm:px-6 lg:px-8-container flex justify-between items-center"
     >
-      <div class="flex gap-2 items-center">
-        <img class="w-6 md:w-8" src="/src/assets/beerjs.svg" alt="beerjs" />
-        <h1 class="text-3xl md:text-4xl font-bold text-white">
+      <div>
+        <span class="text-3xl md:text-4xl font-bold text-white">
           BEER <span class="text-yellow-500">JS</span>
-        </h1>
+        </span>
       </div>
       <div class="flex gap-3 md:gap-6">
         <a target="blank" href="https://www.facebook.com/beerjscbba"
